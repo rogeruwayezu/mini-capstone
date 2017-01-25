@@ -1,0 +1,6 @@
+<% @product %>
+<h2><%= @product.name %></h2>
+<h2><%= @product.description %></h2>
+<h2><img src ="<%= @product.image %>"></h2>
+<%= button_to "Delete", "/products/#{@product.id}", method: :delete %>
+<button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>
