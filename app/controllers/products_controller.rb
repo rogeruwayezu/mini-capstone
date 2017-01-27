@@ -1,5 +1,11 @@
 class ProductsController < ApplicationController
   def index
+    sort_variable = params[:sort]
+        if sort_variable
+          @recipes = Product.all.order(sort_variable)
+        else
+          @recipes = Product.all
+        end
     @products = Product.all
     render "index.html.erb"
   end
