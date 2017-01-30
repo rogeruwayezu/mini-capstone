@@ -6,7 +6,7 @@ class Product < ApplicationRecord
     created_at_strftime("%B %e, %Y")
   end
   def discount_items
-    
-    price.split(", ")
+    params[:discounts]
+          @products = Product.where("price < ?", 200)
   end
 end

@@ -4,14 +4,18 @@ class ProductsController < ApplicationController
       @products = Product.all.order(price: params[:price]) 
     elsif params[:discounts]
       @products = Product.where("price < ?", 200)
-     else 
+    else 
       @products = Product.all
     end
     
   end
   
   def show
+    if params[:id] == "random"
+    @product = Product.all.sample
+    else
     @product = Product.find_by(id: params[:id])
+    end
   end
   def new
 
@@ -46,6 +50,15 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:warning] = "Product deleted"
     redirect_to "/products"
+  end
+  def search
+    search_query = params[:search_input]
+    @products = Product.where("name LIKE ? OR description LIKE ?", "%#{search_query}%", "%#{search_query}%")
+    
+    if @product.empty?
+      flash[:info] = "No product info"
+    end
+    render: index
   end
 end
 
