@@ -5,7 +5,8 @@ class Product < ApplicationRecord
   def friendly_created_at
     created_at_strftime("%B %e, %Y")
   end
-  def price_list
+  def discount_items
+    
     price.split(", ")
   end
 end
