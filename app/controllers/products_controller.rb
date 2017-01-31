@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   def index
     if params[:price]
       @products = Product.all.order(price: params[:price]) 
-    elsif params[:discounts]
+    elsif params[:filter]
       @products = Product.where("price < ?", 200)
     else 
       @products = Product.all
@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
     if @product.empty?
       flash[:info] = "No product info"
     end
-    render: index
+    render :index
   end
 end
 
