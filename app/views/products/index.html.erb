@@ -1,15 +1,17 @@
 <div class="container">
-<h1>All products</h1>
+
 
 <div class="row">
   <% @products.each_slice(3) do |three_products| %>
     <div class="row">
         <% three_products.each do |product| %>
           <div class="col-md-4">
+            <div class="thumbnail">
             <h2><%= link_to product.name, "/products/#{product.id}" %></h2>
-            <img src="<%= product.image %>" class="img-responsive">
+           <img src="<%=  product.image %>" class="img-responsive" >
             <h2>description: <%= product.description %></h2>
             <h2>Price: $<%= product.price %></h2>
+            </div>
           </div>
         <% end %>
     </div>

@@ -1,10 +1,14 @@
 <% @product %>
 <h2><%= @product.name %></h2>
-<h2><%= @product.supplier.name %></h2>
-
-<h2><%= @product.description %></h2>
+<h2>Supplier:<%= @product.supplier.name %></h2>
+<div class="row">
 <h2><% @product.images.each do |image| %></h2>
-  <img src ="<%= image.url %>"
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <img src ="<%= image.url %>" class="img-reponsive" >
+    </div>
+  </div>
     <% end %>
+</div>
 <%= button_to "Delete", "/products/#{@product.id}", method: :delete, data: { confirm: 'are you sure?' } %>
 <button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>
