@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def new
-    render 'new.html.erb'
+    @suppliers = Supplier.all
   end
   def create
     user = User.new(

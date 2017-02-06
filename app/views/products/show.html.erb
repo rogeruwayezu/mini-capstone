@@ -1,6 +1,9 @@
 <% @product %>
 <h2><%= @product.name %></h2>
 <h2>Supplier:<%= @product.supplier.name %></h2>
+<h2>Category:<% @product.categories.each do |category|  %></h2>
+  <%= category.name %>
+<% end %>
 <div class="row">
 <h2><% @product.images.each do |image| %></h2>
   <div class="col-md-4">
@@ -12,3 +15,13 @@
 </div>
 <%= button_to "Delete", "/products/#{@product.id}", method: :delete, data: { confirm: 'are you sure?' } %>
 <button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>
+
+<%= form_tag "/orders", method: :post do %>
+  <div class="form-group">
+     Quantity: <input type="text" name="Quantity" class="form_control" >
+  </div>
+  <div>
+   <input type="submit" value="Buy Now" class="btn btn-default">
+  </div>
+<% end %>
+  

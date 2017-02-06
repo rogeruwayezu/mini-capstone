@@ -9,6 +9,7 @@
   </head>
 
   <body>
+
     <div class="container">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -35,7 +36,9 @@
                   <li><a href="/products?price=asc">Sort price from the lowest to the highest</a></li>
                   <li><a href="/products?price=desc">Sort price form the highest to the lowest</a></li>
                   <li><a href="/products/filter=200">Discount Items</a></li>
-                  
+                  <% Category.all.each do |category| %>
+                    <li><a href="/products/?category=<%= category.name %>"><%= category.name.capitalize %></a></li>
+                  <% end %>
                   <li role="separator" class="divider"></li>
                   <li><a href="#">Separated link</a></li>
                   <li role="separator" class="divider"></li>
@@ -50,17 +53,13 @@
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Logout", "/logout", method: :delete %></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
-              </li>
+              <% if current_user %>
+                            <li><%= link_to "Logout", "/logout"%></li>
+                          <% else %>
+                            <li><%= link_to "Sign Up", "/signup" %></li>
+                            <li><%= link_to "Login", "/login" %></li>
+                          <% end %>
+            </ul>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

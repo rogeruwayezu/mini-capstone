@@ -4,10 +4,12 @@ class ProductsController < ApplicationController
       @products = Product.all.order(price: params[:price]) 
     elsif params[:filter]
       @products = Product.where("price < ?", 200)
+    
+    elsif params[:category]
+      @products =  Category.find_by(name: params[:category]).products
     else 
       @products = Product.all
     end
-    
   end
   
   def show
@@ -18,14 +20,14 @@ class ProductsController < ApplicationController
     end
   end
   def new
+    @suppliers = Supplier.all
 
   end
   def create
     name = params[:name]
     description = params[:description]
     price = params[:price]
-    image = params[:image]
-    product = Product.new({name: name, description: description, price: price, image: image})
+    product = Product.new({name: name, description: description, price: price})
     product.save
     flash[:info] = "Product created"
     redirect_to "/products/#{product.id}"
