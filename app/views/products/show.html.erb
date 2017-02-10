@@ -13,15 +13,22 @@
   </div>
     <% end %>
 </div>
+<% if current_user %>
 <%= button_to "Delete", "/products/#{@product.id}", method: :delete, data: { confirm: 'are you sure?' } %>
 <button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>
-
-<%= form_tag "/orders", method: :post do %>
+<% end %>
+<% if current_user %>
+<%= form_tag "/carted_products", method: :post do %>
   <div class="form-group">
-     Quantity: <input type="text" name="Quantity" class="form_control" >
+    Quantity: <input type="text" name="quantity" class="form_control" >
   </div>
   <div>
-   <input type="submit" value="Buy Now" class="btn btn-default">
+    <input type="hidden" name="product_id" class="form_control" value="<%= @product.id %>">
+  </div>
+  <div>
+   <input type="submit" value="Add to chart" class="btn btn-default">
   </div>
 <% end %>
+<% end %>
+
   

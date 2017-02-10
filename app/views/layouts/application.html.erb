@@ -55,6 +55,7 @@
             <ul class="nav navbar-nav navbar-right">
               <% if current_user %>
                             <li><%= link_to "Logout", "/logout"%></li>
+                            <li><%= link_to "Shoping Card", "/carted_products"%></li>
                           <% else %>
                             <li><%= link_to "Sign Up", "/signup" %></li>
                             <li><%= link_to "Login", "/login" %></li>
@@ -65,7 +66,7 @@
         </div><!-- /.container-fluid -->
       </nav>
       <% flash.each do |name, message| %>
-        <div class="alert alert-<%= name %>" role="alert"><%= message %></div>
+        <div class="alert alert-<%= name %> role="alert"><%= message %></div>
         
       <% end %>
       
