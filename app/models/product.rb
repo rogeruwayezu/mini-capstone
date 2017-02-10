@@ -6,6 +6,9 @@ class Product < ApplicationRecord
   has_many :categories, through: :category_products
   has_many :carted_products
   has_many :orders, through: :carted_products
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :price, numericality: {greater_than: 0}
   def tax
     price * 0.09
   end
