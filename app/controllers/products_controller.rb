@@ -23,30 +23,43 @@ class ProductsController < ApplicationController
   end
   def new
     @suppliers = Supplier.all
+    @product = Product.new
   end
   def create
-    name = params[:name]
-    description = params[:description]
-    price = params[:price]
-    @product = Product.new({name: name, description: description, price: price})
-    product.save
-    flash[:info] = "Product created"
-    redirect_to "/products/#{product.id}"
+   @product = Product.new({
+      name: params[:name],
+      description: params[:description],
+      price: params[:price],
+      supplier_id: params[:supplier_id]
+      })
+    if @product.save
+      flash[:success] = "Product created"
+    redirect_to "/products/#{@product.id}"
+    else
+      @suppliers = Supplier.all
+      flash[:warning] = "Product Not Created"
+      render :new
+    end
   end
   def edit
     @product = Product.find_by(id: params[:id])
+    @suppliers = Supplier.all
   end
   def update
-    product = Product.find_by(id: params[:id])
-    product.assign_attributes({})
-    product.name = params[:name]
-    product.description = params[:description]
-    product.price = params[:price]
-    product.image = params[:image]
-    
-    product.save
-    flash[:success] = "Product updated"
-    redirect_to "/products/#{product.id}" 
+    @product = Product.find_by(id: params[:id])
+    @product.assign_attributes({
+      name: params[:name],
+      description: params[:description],
+      price: params[:price],
+      supplier_id: params[:supplier_id]
+    })
+    if @product.save
+      flash[:success] = "Product Updated"  
+      redirect_to "/products/#{@product.id}"
+    else
+      @suppliers = Supplier.all
+      render :edit
+    end
   end
   def destroy
     @product = Product.find_by(id: params[:id])

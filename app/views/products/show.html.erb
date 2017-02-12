@@ -13,7 +13,7 @@
   </div>
     <% end %>
 </div>
-<% if current_user %>
+<% if current_user && current_user.admin %>
 <%= button_to "Delete", "/products/#{@product.id}", method: :delete, data: { confirm: 'are you sure?' } %>
 <button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>
 <% end %>

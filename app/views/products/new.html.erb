@@ -1,5 +1,11 @@
 <h1>New product</h1>
-
+<ul>
+ <% if @product.errors.any? %>
+   <% @product.errors.full_messages.each do |message| %>
+     <li class="model-errors"><%= message %></li> 
+   <% end %>
+ <% end %>
+ </ul>
 <%= form_tag "/products", method: :post do %>
   <div class="form-group">
   Name: <input type="text" name="name" class="form_control">
@@ -9,9 +15,6 @@
   </div>
   <div class="form-group">
   Price: <input type="text" name="price" class="form_control">
-  </div>
-  <div class="form-group">
-  Image: <input type="text" name="image" class="form_control">
   </div>
   <div class="form-group">
   Supplier: 

@@ -1,4 +1,11 @@
 <h1>Signup!</h1>
+<ul>
+<% if @user.errors.any? %>
+   <% @user.errors.full_messages.each do |message| %>
+     <li class="model-errors"><%= message %></li> 
+   <% end %>
+<% end %>
+</ul>
 <%= form_tag '/users', method: :post do  %>
   <div>
     Name:
